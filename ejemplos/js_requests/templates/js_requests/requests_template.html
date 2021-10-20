@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Javascript Requests example</title>
+</head>
+
+<body>
+    <!-- Formulario de ingreso de data -->
+    <h2>Data ingresada manualmente</h2>
+    <form id="my-data-form" method="POST">
+        {% csrf_token %}
+        <label for="my-input">Texto a enviar:</label>
+        <input type="text" id="my-input" name="text">
+
+        <div>
+            <!-- El botón "submit" debe estar dentro del <form>, los otros pueden estar en cualquier parte -->
+            <button type="submit">Enviar con submit</button>
+            <button type="button" onclick="sendWithJSSubmit()">Enviar con submit (JS)</button>
+            <button type="button" onclick="sendWithFetch()">Enviar con fetch</button>
+        </div>
+    </form>
+
+    <!-- Otra opción: Usar un formulario oculto para enviar la data
+    Esto nos permite enviar cualquier data y ahorrarnos trabajar con requests manuales -->
+    <h2>Data arbitraria usando forms ocultos</h2>
+    <form hidden id="my-hidden-form" method="POST">
+        {% csrf_token %}
+        <input type="hidden" id="my-hidden-input" name="text">
+    </form>
+    <p>Número generado: <span id="my-random"></span></p>
+    <button type="button" onclick="generateNumber()">Generar número</button>
+    <button type="button" onclick="sendWithHiddenForm()">Enviar con form oculto</button>
+    
+    <hr>
+    <!-- Lista con la data guardada -->
+    <h3>Data guardada:</h3>
+    <ul>
+        {% for item in my_data %}
+            <li>{{ item.text }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Este es un form falso usado para mandar un POST con la data -->
+    <form id="location-form" method="POST" hidden>
+        {% csrf_token %}
+        <input id="lat-input" type="hidden" name="lat">
+        <input id="lon-input" type="hidden" name="lon">
+    </form>
+
+    <!-- Esta línea facilita obtener el token CSRF en el script de Javascript -->
+    <script>csrf_token = '{{ csrf_token }}'</script>
+    <!-- Esta línea linkea el Javascript con el template -->
+    <script src="/static/js_requests/js/requests_script.js"></script>
+</body>
+
+</html>
