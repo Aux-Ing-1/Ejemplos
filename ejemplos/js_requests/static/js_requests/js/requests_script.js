@@ -1,20 +1,19 @@
 // Fuente: https://www.w3schools.com/html/html5_geolocation.asp
 
-
-// Activar el "submit" del formulario usando Javascript.
+// ===== Submit con JS =====
 function sendWithJSSubmit() {
     const form = document.getElementById("my-data-form");
     form.submit();
 }
 
-// Enviar la request de forma asíncrona.
+// ===== Request asíncrona con fetch =====
 // Notar que necesitamos traer el csrf_token en el template,
 // y que este método no está directamente relacionado al form, por lo que podría enviarse cualquier data en el body.
 function sendWithFetch() {
     const inputText = document.getElementById("my-input");
     fetch("", {
         method: "POST",
-        body: new URLSearchParams({ "text": inputText.value }),
+        body: new URLSearchParams({ "text": inputText.value }),  // Aquí va la data
         headers: {
             "X-CSRFToken": csrf_token,
             "Content-Type": 'application/x-www-form-urlencoded; charset=utf-8'
@@ -25,9 +24,7 @@ function sendWithFetch() {
     });
 }
 
-// ===================================================================
-
-
+// ===== Formularios ocultos =====
 let generatedNumber = 0  // Variable global
 
 function generateNumber() {
