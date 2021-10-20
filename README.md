@@ -8,6 +8,7 @@ Todo el repo es un proyecto de Django y cada ejemplo es una _app_ del mismo. Par
 - `python manage.py makemigrations`
 - `python manage.py migrate`
 - `python manage.py runserver`
+- 
 Si tienes dudas sobre esto, consulta las actividades de las auxiliares.
 
 ## Ejemplos disponibles
