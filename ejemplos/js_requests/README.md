@@ -38,7 +38,7 @@ function sendWithJSSubmit() {
 ```
 Es sencillo ver que estamos seleccionando el elemento HTML que tiene `id="my-data-form"`. Luego, llamamos la función `submit()` de ese elemento, lo que es equivalente a presionar un `<button type="submit">`.
 
-En el template, vemos que el segundo botón tiene los atributos `type="button" onclick="sendWithJSSubmit()"`. Esto hará que al clickear el botón se llame a esa función. De esta forma, el botón queda desasociado del form y podría estar en cualquier parte de este template.
+En el template, vemos que el segundo botón tiene los atributos `type="button" onclick="sendWithJSSubmit()"`. Esto hará que al clickear el botón se llame a esta función que encontrará el form por su ID y lo enviará. De esta forma, el botón queda desasociado del form y podría estar en cualquier parte de este template.
 
 ### Formularios ocultos para enviar data arbitraria
 Las dos opciones anteriores nos limitan a enviar data que sea ingresada por el usuario en los forms. Si queremos, por ejemplo, generar un número aleatorio por el lado del cliente (Javascript) y enviarlo al servidor, no podríamos hacerlo directamente con un formulario típico. Para esto, una opción es utilizar forms ocultos que podamos rellenar desde JS y luego hacerles submit como ya vimos. La ventaja de esto es que usamos el sistema que ya conocemos y no tendremos problemas por tecnicidades o por el token CSRF (más info al final).
