@@ -29,7 +29,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'js_requests'
+    'js_requests',
+    'js_geolocation'
 ]
 
 MIDDLEWARE = [

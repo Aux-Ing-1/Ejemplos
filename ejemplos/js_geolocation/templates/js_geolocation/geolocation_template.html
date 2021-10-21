@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/js_geolocation/css/style.css">
+    <title>Geolocalización con Javascript</title>
+</head>
+
+<body>
+
+    <p>Lat: <span id="lat-span">--</span></p>
+    <p>Lon: <span id="lon-span">--</span></p>
+    <p id="info">-</p>
+
+    <button type="button" onclick="getLocation()">Obtener ubicación</button>
+    <button type="button" onclick="saveLocation()">Guardar ubicación</button>
+
+    <p>Ubicaciones guardadas:</p>
+    {% for location in locations %}
+    <p>{{ location.date_obtained }}: {{ location.lat }}, {{ location.lon }}</p>
+    {% endfor %}
+
+    <!-- Este es un form falso usado para mandar un POST con la data con el token CSRF
+    Revisar requests Javascript en el repo de Ejemplos -->
+    <form id="location-form" method="POST" hidden>
+        {% csrf_token %}
+        <input id="lat-input" type="hidden" name="lat">
+        <input id="lon-input" type="hidden" name="lon">
+    </form>
+
+    <!-- Esta línea linkea el Javascript con el template -->
+    <script src="/static/js_geolocation/js/scripts.js"></script>
+</body>
+
+</html>
