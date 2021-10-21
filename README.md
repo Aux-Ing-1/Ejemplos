@@ -13,3 +13,4 @@ Si tienes dudas sobre esto, consulta las actividades de las auxiliares.
 
 ## Ejemplos disponibles
 - [Requests a Django usando Javascript](https://github.com/Aux-Ing-1/Ejemplos/tree/master/ejemplos/js_requests). Cómo enviar data desde el cliente/frontend/Javascript hacia el servidor/backend/Django de forma más compleja que los formularios de las auxiliares.
+- [Geolocalización usando Javascript](https://github.com/Aux-Ing-1/Ejemplos/tree/master/ejemplos/js_geolocation). Cómo solicitar las coordenadas del dispositivo con Javascript y enviarlas al servidor.
