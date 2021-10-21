@@ -1,16 +1,16 @@
 # Enviar requests a Django usando Javascript
 En este ejemplo veremos distintas formas de comunicarnos desde Javascript hacia Django, de forma que podamos enviar data de forma más libre que usando solo los formularios que vimos en clases.
 
-## Correr el ejemplo
-Seguimos el mismo procedimiento de siempre:
-- Clonar repo en local.
-- Crear y activar un ambiente virtual.
-- Instalar Django.
-Si tienes dudas sobre esto, consulta las actividades de las auxiliares.
+Para clonar este repo debes ir a [la raíz del proyecyo](https://github.com/Aux-Ing-1/Ejemplos).
 
-La interfaz de este ejemplo estará en la URL `127.0.0.1:8000/js/requests`.
+## Javascript vs Django
+Es importante en este punto entender que una página web corre en dos lugares: el servidor/backend (nuestro computador corriendo Python) y el cliente/frontend (el browser de el/la usuario/a corriendo Javascript). Todo lo que ocurre en Javascript está pasando localmente en el computador cliente, por lo que desde el servidor no tenemos acceso a ello directamente. Para poder comunicar el front con el back, es necesario enviar una **request**, usualmente de tipo POST, y eso es lo que hemos estado haciendo al enviar un formulario. En este ejemplo veremos cómo enviar estas requests desde el frontend con Javascript.
 
-## Estructura
+Javascript es un lenguaje de programación similar a otros que conoces, como Python, Java, C, etc. Es bastante flexible en cuanto a sintaxis y estándares (a diferencia de Java, por ejemplo), pero a nivel básico se maneja de manera similar a los demás (variables, funciones, operaciones `if`, `for`, `while`, etc). Su característica principal es que corre en el navegador del cliente y permite manipular el DOM (estructura del HTML). En el siguiente enlace puedes ver un resumen ejemplificado de la sintaxis y funciones básicas de JS:
+
+[W3Schools: Javascript Examples](https://www.w3schools.com/js/js_examples.asp)
+
+## Estructura del ejemplo
 En esta app tenemos los siguientes archivos relevantes:
 - `static/js_requests/js/requests_script.js`: Contiene los scripts de Javascript, donde ocurre el núcleo de este ejemplo.
 - `templates/js_requests/requests_template.html`: El template o página HTML que renderea la interfaz del ejemplo. Observar al final del template cómo se hace el enlace entre con el `.js`
@@ -18,11 +18,13 @@ En esta app tenemos los siguientes archivos relevantes:
 - `views.py`: Define una única view sencilla que renderea el template en caso de GET, y guarda un item nuevo en caso de POST.
 - `urls.py`: Define una única URL para la interfaz: `/js/requests`.
 
+Para utilizar el ejemplo corre el servider e ingresa a la URL `127.0.0.1:8000/js/requests`.
+
 ## Explicación
-Te explicaremos 4 formas distintas de hacer esto, cada una con pros y contras. La mejor solución dependerá netamente del contexto y necesidades, por lo que es buena idea conocerlas todas.
+Te explicaremos 4 formas distintas de hacer esto, cada una tiene sus pros y contras. La mejor solución dependerá netamente del contexto y necesidades, por lo que es buena idea conocerlas todas.
 
 ### Formularios básicos
-La primera forma de enviar data es la que ya conocemos de las clases auxiliares. Crear un `<form method="POST">` en el HTML que dentro tenga un `<button type="submit">` dentro. De esta forma no estamos usando Javascript directamente, sino que el browser se encarga de enviar la request con la data que consiga del formulario.
+La primera forma de enviar data es la que ya conocemos de las clases auxiliares. Crear un `<form method="POST">` en el HTML que tenga un `<button type="submit">` dentro. De esta forma no estamos usando Javascript directamente, sino que el browser se encarga de enviar la request con la data que consiga del formulario.
 
 Esto se ejemplifica en la primera parte del template, donde está el form con `id="my-data-form"`, y se activa con el primer botón de la interfaz.
 
@@ -39,7 +41,7 @@ Es sencillo ver que estamos seleccionando el elemento HTML que tiene `id="my-dat
 En el template, vemos que el segundo botón tiene los atributos `type="button" onclick="sendWithJSSubmit()"`. Esto hará que al clickear el botón se llame a esa función. De esta forma, el botón queda desasociado del form y podría estar en cualquier parte de este template.
 
 ### Formularios ocultos para enviar data arbitraria
-Las dos opciones anteriores nos limitan a enviar data que sea ingresada por el usuario en los forms. Si queremos, por ejemplo, generar un número aleatorio por el lado del cliente (Javascript) y enviarlo al servidor, no podríamos hacerlo directamente con un formulario típico. Para esto, una opción es utilizar forms ocultos que podamos rellenar desde JS y luego hacerles submit como ya vimos. La ventaja de esto es que usamos el sistema que ya conocemos y no tendremos problemas por el token CSRF (más info al final).
+Las dos opciones anteriores nos limitan a enviar data que sea ingresada por el usuario en los forms. Si queremos, por ejemplo, generar un número aleatorio por el lado del cliente (Javascript) y enviarlo al servidor, no podríamos hacerlo directamente con un formulario típico. Para esto, una opción es utilizar forms ocultos que podamos rellenar desde JS y luego hacerles submit como ya vimos. La ventaja de esto es que usamos el sistema que ya conocemos y no tendremos problemas por tecnicidades o por el token CSRF (más info al final).
 
 Observamos la segunda parte de la interfaz. En el template tenemos un `<form hidden ...>` que dentro tiene un `<input type="hidden">`. Esto no se mostrará en la interfaz. Debajo tenemos un botón que llama la siguiente función:
 ```js
@@ -102,6 +104,8 @@ PD: Para poder usar `csrf_token` acá, es necesario pasarlo desde el template co
 ### Token CSRF
 El Cross Site Request Forgery o CSRF es un tipo de ataque en el que la parte atacante genera requests hacia tu sitio desde otro sitio, pudiendo hacer que un/a usuario/a despistado/a genere acciones indeseadas. Por ejemplo, presionar un botón en el sitio malicioso que envía una request a tu servidor solicitando un cambio de e-mail, de la misma forma que usamos `fetch` más arriba para enviar POSTs. El browser automáticamente agregará la cookie de sesión de usuario/a a la request y el servidor la aceptará y cambiará la data a voluntad de la persona atacante.
 
-Para evitar esto, cada vez que cargamos una página Django envía al cliente un token generado aleatoriamente. Luego, cualquier request que se solicite requerirá que se envíe este mismo token de vuelta. De esta forma, se asegura que todas las requests vengan desde el propio sitio y no uno ajeno. Así, se dificulta enormemente que un ataque consiga la sesión Y el token CSRF de un/a usuario/a.
+Para evitar esto, cada vez que cargamos una página, Django envía al cliente un token generado aleatoriamente. Luego, cualquier request que se solicite requerirá que se envíe este mismo token de vuelta. De esta forma, se asegura que todas las requests vengan desde el propio sitio y no uno ajeno (Cross-Site Request). Así, se dificulta enormemente que un ataque consiga la sesión y además el token CSRF de un/a usuario/a, dando mayor seguridad de que todas las requests vendrán desde nuestro propio sitio.
 
-Dado todo esto, cada vez que enviamos un form o request es necesario incluir este token. En este ejemplo lo estamos pasando como variable global al script de JS por ser más sencillo, pero una forma más segura[?] de obtenerlo sería a través de las cookies.
+Dado todo esto, cada vez que enviamos un form o request es necesario incluir este token. De hecho, al usar `{% csrf_token %}` dentro de un `<form>` en nuestro template, lo que el template hace es agregar un input invisible con `name="csrfmiddlewaretoken"` y `value=<nuestro-token>`, para que se envíe junto con el form, similar a como aprendimos recién.
+
+Al final de este ejemplo pasamos el token como variable global al script de JS por ser más sencillo, pero una forma más segura[?] de obtenerlo sería a través de las cookies.
