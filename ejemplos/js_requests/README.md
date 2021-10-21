@@ -1,7 +1,7 @@
 # Enviar requests a Django usando Javascript
 En este ejemplo veremos distintas formas de comunicarnos desde Javascript hacia Django, de forma que podamos enviar data de forma más libre que usando solo los formularios que vimos en clases.
 
-Para clonar este repo debes ir a [la raíz del proyecyo](https://github.com/Aux-Ing-1/Ejemplos).
+Para clonar este repo debes ir a [la raíz del proyecto](https://github.com/Aux-Ing-1/Ejemplos).
 
 ## Javascript vs Django
 Es importante en este punto entender que una página web corre en dos lugares: el servidor/backend (nuestro computador corriendo Python) y el cliente/frontend (el browser de el/la usuario/a corriendo Javascript). Todo lo que ocurre en Javascript está pasando localmente en el computador cliente, por lo que desde el servidor no tenemos acceso a ello directamente. Para poder comunicar el front con el back, es necesario enviar una **request**, usualmente de tipo POST, y eso es lo que hemos estado haciendo al enviar un formulario. En este ejemplo veremos cómo enviar estas requests desde el frontend con Javascript.
@@ -18,7 +18,7 @@ En esta app tenemos los siguientes archivos relevantes:
 - `views.py`: Define una única view sencilla que renderea el template en caso de GET, y guarda un item nuevo en caso de POST.
 - `urls.py`: Define una única URL para la interfaz: `/js/requests`.
 
-Para utilizar el ejemplo corre el servider e ingresa a la URL `127.0.0.1:8000/js/requests`.
+Para utilizar el ejemplo corre el servidor e ingresa a la URL `127.0.0.1:8000/js/requests`.
 
 ## Explicación
 Te explicaremos 4 formas distintas de hacer esto, cada una tiene sus pros y contras. La mejor solución dependerá netamente del contexto y necesidades, por lo que es buena idea conocerlas todas.
