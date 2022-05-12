@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'js_requests',
-    'js_geolocation'
+    'js_geolocation',
+    'js_tables'
 ]
 
 MIDDLEWARE = [

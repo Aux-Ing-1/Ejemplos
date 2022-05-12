@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ordering Table example</title>
+
+    <!-- Don't forget to include this (JQuery & DataTables)-->
+    <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/js_tables/css/style_framework.css"> <!--To have the "display" class for the table-->
+    <!--Documentation for DataTables: https://datatables.net/ -->
+
+</head>
+
+<body>
+    <h1>Ordering Table Example</h1>
+    <p>Using a existing framework (DataTables from JQuery)</p>
+    <!--You can use any framework to give style this table, even create your own.-->
+    <table id="table" class="display">
+        <thead>
+        <tr>
+            <th onclick="sortTable(0)">Name</th>
+            <th onclick="sortTable(1)">Year</th>
+            <th onclick="sortTable(2)">Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for movie in movies %}
+        <tr id="{{ movie.id }}">
+            <td>{{ movie.name }}</td>
+            <td>{{ movie.year }}</td>
+            <td>{{ movie.rating}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+    <script src="/static/js_tables/js/tables_script_framework.js"></script>
+</body>
+
+</html>

@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('js/', include('js_requests.urls')),
     path('js/', include('js_geolocation.urls')),
+    path('js/', include('js_tables.urls'))
 ]

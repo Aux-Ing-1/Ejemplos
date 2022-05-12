@@ -1,0 +1,48 @@
+[
+    {
+      "model": "js_tables.Movie",
+      "pk": 1,
+      "fields": {
+        "name": "Batman",
+        "year": 2022,
+        "rating": 9.6
+      }
+    },
+    {
+        "model": "js_tables.Movie",
+        "pk": 2,
+        "fields": {
+          "name": "The Northman",
+          "year": 2021,
+          "rating": 2.5
+        }
+      },
+      {
+        "model": "js_tables.Movie",
+        "pk": 3,
+        "fields": {
+          "name": "Shrek 1",
+          "year": 2001,
+          "rating": 10
+        }
+      },
+      {
+        "model": "js_tables.Movie",
+        "pk": 4,
+        "fields": {
+          "name": "Dune",
+          "year": 2021,
+          "rating": 8.1
+        }
+      },
+
+      {
+        "model": "js_tables.Movie",
+        "pk": 5,
+        "fields": {
+          "name": "Memento",
+          "year": 1998,
+          "rating": 4.5
+        }
+      }    
+  ]
